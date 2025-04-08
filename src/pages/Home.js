@@ -68,6 +68,8 @@ const Home = () => {
     const inputRef = useRef(null);
     const cardRefs = useRef([]); // 카드 refs 배열
 
+    // const [noResultMessage, setNoResultMessage] = useState(false);
+
     // Ctrl + K 단축키
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -90,6 +92,11 @@ const Home = () => {
             const results = allBookmarks.filter(b =>
                 b.name.toLowerCase().includes(query.toLowerCase())
             );
+            if (results.length === 0) {
+                window.location.reload(); // 검색 결과가 없을 경우 페이지 새로고침
+                // setNoResultMessage(true);
+                // setTimeout(() => setNoResultMessage(false), 3000); // 3초 후 알림 사라짐
+            }
             setFiltered(results);
             setShowSearch(false);
             setTimeout(() => {
@@ -205,6 +212,14 @@ const Home = () => {
                     </div>
                 ))}
             </div>
+            {/* {noResultMessage && (
+                <div
+                    className="position-fixed bottom-0 end-0 m-4 bg-danger text-white px-4 py-2 rounded shadow"
+                    style={{ zIndex: 9999, fontSize: "0.9rem" }}
+                >
+                    검색 결과가 없습니다 😢
+                </div>
+            )} */}
         </div>
     );
 };
