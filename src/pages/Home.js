@@ -73,7 +73,9 @@ const Home = () => {
         const handleKeyDown = (e) => {
             if (e.ctrlKey && e.key === 'k') {
                 e.preventDefault();
-                setShowSearch(true);
+                setFiltered([]);       // 결과 초기화
+                setQuery("");          // 검색어 초기화
+                setShowSearch(true);   // 검색창 열기
                 setTimeout(() => inputRef.current?.focus(), 100);
             }
         };
